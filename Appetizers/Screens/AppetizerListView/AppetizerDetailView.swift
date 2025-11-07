@@ -28,39 +28,11 @@ struct AppetizerDetailView: View {
                     .font(.body)
                     .multilineTextAlignment(.center).padding(.horizontal, 20)
             }.padding(.bottom, 20)
-            
+
             HStack(spacing: 40) {
-                VStack(spacing: 5) {
-                    Text("Calories")
-                        .bold()
-                        .font(.caption)
-
-                    Text("\(appetizer.calories)")
-                        .foregroundColor(.secondary)
-                        .fontWeight(.semibold)
-                        .italic()
-                }
-                VStack(spacing: 5) {
-                    Text("Carbs")
-                        .bold()
-                        .font(.caption)
-
-                    Text("\(appetizer.carbs)")
-                        .foregroundColor(.secondary)
-                        .fontWeight(.semibold)
-                        .italic()
-                }
-
-                VStack(spacing: 5) {
-                    Text("Protein")
-                        .bold()
-                        .font(.caption)
-
-                    Text("\(appetizer.protein)")
-                        .foregroundColor(.secondary)
-                        .fontWeight(.semibold)
-                        .italic()
-                }
+                NutritionInfoView(label: "Calories", value: appetizer.calories)
+                NutritionInfoView(label: "Carbs", value: appetizer.carbs)
+                NutritionInfoView(label: "Protein", value: appetizer.protein)
             }
 
             Spacer()

@@ -12,9 +12,20 @@ final class AppetizersListViewModel: ObservableObject {
     @Published var appetizers: [Appetizer] = []
     @Published var alertItem: AlertItem? = nil
     @Published var isLoading: Bool = false
+    @Published var selectedAppetizer: Appetizer? = nil
+    @Published var isDetailViewVisible: Bool = false
 
     init() {
         getAppetizers()
+    }
+
+    func onAppetizerClick(appetizer: Appetizer) {
+        selectedAppetizer = appetizer
+        isDetailViewVisible = true
+    }
+
+    func onAppetizerDetailDismissClick() {
+        isDetailViewVisible = false
     }
 
     private func getAppetizers() {
