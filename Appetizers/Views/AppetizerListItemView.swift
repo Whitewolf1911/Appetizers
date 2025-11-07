@@ -12,10 +12,11 @@ struct AppetizerListItemView: View {
 
     var body: some View {
         HStack {
-            Image(appetizer.imageURL)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 80)
+            AsyncImage(url: URL(string: appetizer.imageURL)){image in
+                image.resizable()
+            } placeholder: {
+                Image("food-placeholder").resizable()
+            }.frame(width: 100, height: 80)
                 .clipShape(
                     .rect(
                         cornerRadii: .init(
@@ -26,6 +27,10 @@ struct AppetizerListItemView: View {
                         )
                     )
                 )
+                .aspectRatio(contentMode: .fit)
+               
+        
+             
             Spacer().frame(width: 20)
             VStack(alignment: .leading) {
                 Text(appetizer.name).font(.headline).fontWeight(.semibold)
