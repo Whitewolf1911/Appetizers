@@ -9,33 +9,37 @@ import SwiftUI
 
 struct OrderView: View {
 
-    @State private var orderItems = MockData.orderItems
+    @EnvironmentObject var order: Order
 
     var body: some View {
         NavigationView {
             VStack {
-                if orderItems.isEmpty {
+                if order.items.isEmpty {
                     EmptyStateView(
                         imageName: "empty-order",
-                        message: "You have no items in your order.\nStart ordering some appetizers!"
+                        message:
+                            "You have no items in your order.\nStart ordering some appetizers!"
                     )
                 } else {
                     List {
-                        ForEach(orderItems) { appetizer in
+                        ForEach(order.items) { appetizer in
                             AppetizerListItemView(appetizer: appetizer)
-                        }.onDelete(perform: deleteItems)
+                        }.onDelete(perform: order.deleteItems)
                     }.listStyle(.plain)
 
                     Button {
+                        //TODO:
                         print("Tapped")
                     } label: {
-                        Text("Order")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .frame(width: 260, height: 50)
-                            .foregroundColor(.white)
-                            .background(Color.brandPrimary)
-                            .cornerRadius(10)
+                        Text(
+                            "$\(order.totalPrice, specifier:"%.2f") - Place Order"
+                        )
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(width: 260, height: 50)
+                        .foregroundColor(.white)
+                        .background(Color.brandPrimary)
+                        .cornerRadius(10)
                     }.padding(.bottom, 30)
                 }
 
@@ -44,7 +48,4 @@ struct OrderView: View {
         }
     }
 
-    private func deleteItems(atOffsets: IndexSet) {
-        orderItems.remove(atOffsets: atOffsets)
-    }
 }

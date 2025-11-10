@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppetizerDetailView: View {
+    @EnvironmentObject var order: Order
+
     let appetizer: Appetizer
     let onDismissClick: () -> Void
 
@@ -38,7 +40,9 @@ struct AppetizerDetailView: View {
             Spacer()
 
             Button {
-                print("Tapped")
+                order.add(appetizer)
+                //Dismiss after adding the item.
+                onDismissClick()
             } label: {
                 Text("$\(appetizer.price, specifier: "%.2f") - Add to Order")
                     .font(.title3)
