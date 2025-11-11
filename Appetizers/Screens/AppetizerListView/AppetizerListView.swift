@@ -16,10 +16,13 @@ struct AppetizerListView: View {
             NavigationView {
                 List(viewModel.appetizers) { appetizer in
                     AppetizerListItemView(appetizer: appetizer)
+//                        .listRowSeparator(.hidden)
+//                        .listRowSeparatorTint(.brandPrimary)
                         .onTapGesture {
                             viewModel.onAppetizerClick(appetizer: appetizer)
                         }
-                }.navigationTitle(Text("Appetizers"))
+                }.listStyle(.plain)
+                    .navigationTitle(Text("Appetizers"))
                     .disabled(viewModel.isDetailViewVisible)
 
             }.blur(radius: viewModel.isDetailViewVisible ? 20 : 0)
